@@ -1,6 +1,6 @@
 "use client";
 
-import SceneView from "./scene/view";
+import SceneDefaultView from "./scene/default";
 import { GameControls } from "../../../../domain/type";
 import { KeyboardControls, KeyboardControlsEntry } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
@@ -24,7 +24,7 @@ const ContainerView = () => {
       <RecoilRoot>
         <Canvas shadows={{ type: PCFSoftShadowMap, enabled: true }}>
           <color attach="background" args={[new Color("#47B33C")]} />
-          <SceneView />
+          <SceneDefaultView />
         </Canvas>
       </RecoilRoot>
     </KeyboardControls>

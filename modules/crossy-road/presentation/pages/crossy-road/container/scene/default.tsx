@@ -16,7 +16,7 @@ import { OrthographicCamera } from "@react-three/drei";
 import { useLayoutEffect, useRef } from "react";
 import { Color, DirectionalLight, Group } from "three";
 
-const SceneView = () => {
+const SceneDefaultView = () => {
   const chickenRef = useRef<Group>(null!);
   const lightRef = useRef<DirectionalLight>(null!);
 
@@ -47,4 +47,4 @@ const SceneView = () => {
   );
 };
 
-export default SceneView;
+export default SceneDefaultView;
