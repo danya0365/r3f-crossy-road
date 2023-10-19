@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Lane } from '../type';
-import GrassView from './grass-view';
-import OccupiesView from './occupies-view';
+import { Lane } from "../../../../../domain/type";
+import GrassView from "./grass-view";
+import OccupiesView from "./occupies-view";
 
 const ForestView = ({ lane }: { lane: Lane }) => {
   return (

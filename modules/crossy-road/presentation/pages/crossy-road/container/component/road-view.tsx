@@ -1,10 +1,14 @@
-'use client';
+"use client";
 
-import { BOARD_WIDTH, POSITION_WIDTH, ZOOM } from '../constant';
-import { Lane } from '../type';
-import { PropsWithChildren } from 'react';
-import { Color } from 'three';
-import OccupiesView from './occupies-view';
+import {
+  BOARD_WIDTH,
+  POSITION_WIDTH,
+  ZOOM,
+} from "../../../../../domain/constant/constant";
+import { Lane } from "../../../../../domain/type";
+import { PropsWithChildren } from "react";
+import { Color } from "three";
+import OccupiesView from "./occupies-view";
 
 const RoadView = ({ lane, children }: { lane: Lane } & PropsWithChildren) => {
   const laneNumber = lane.laneNumber;
@@ -47,9 +51,9 @@ const RoadView = ({ lane, children }: { lane: Lane } & PropsWithChildren) => {
 
   return (
     <group position={[0, y, z]}>
-      <MiddleSection color={'#454a59'} />
-      <LeftSection color={'#393d49'} />
-      <RightSection color={'#393d49'} />
+      <MiddleSection color={"#454a59"} />
+      <LeftSection color={"#393d49"} />
+      <RightSection color={"#393d49"} />
       <OccupiesView lane={lane} />
       {children}
     </group>

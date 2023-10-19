@@ -1,11 +1,15 @@
-'use client';
+"use client";
 
-import { BOARD_WIDTH, POSITION_WIDTH, ZOOM } from '../constant';
-import { Lane, OccupyObject } from '../type';
-import Texture from './texture';
-import { GroupProps, MeshProps, useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
-import { Color, Group } from 'three';
+import {
+  BOARD_WIDTH,
+  POSITION_WIDTH,
+  ZOOM,
+} from "../../../../../domain/constant/constant";
+import { Lane, OccupyObject } from "../../../../../domain/type";
+import Texture from "./texture";
+import { GroupProps, MeshProps, useFrame } from "@react-three/fiber";
+import { useRef } from "react";
+import { Color, Group } from "three";
 
 const aBitBeforeTheBeginningOfLane =
   (-BOARD_WIDTH * ZOOM) / 2 - POSITION_WIDTH * 2 * ZOOM;
@@ -16,15 +20,15 @@ export const carFrontTexture = Texture(40, 80, [{ x: 0, y: 10, w: 30, h: 60 }]);
 export const carBackTexture = Texture(40, 80, [{ x: 10, y: 10, w: 30, h: 60 }]);
 export const carRightSideTexture = Texture(110, 40, [
   { x: 10, y: 0, w: 50, h: 30 },
-  { x: 70, y: 0, w: 30, h: 30 }
+  { x: 70, y: 0, w: 30, h: 30 },
 ]);
 export const carLeftSideTexture = Texture(110, 40, [
   { x: 10, y: 10, w: 50, h: 30 },
-  { x: 70, y: 10, w: 30, h: 30 }
+  { x: 70, y: 10, w: 30, h: 30 },
 ]);
 
 const Wheel = (props: MeshProps) => {
-  const color = '#FF5733'; //'#333333';
+  const color = "#FF5733"; //'#333333';
   const z = 6 * ZOOM;
   return (
     <mesh position={[0, 0, z]} {...props}>
@@ -58,7 +62,7 @@ export const CarView = ({
   const Cabin = () => {
     const z = 25.5 * ZOOM;
     const x = 6 * ZOOM;
-    const color = '#cccccc';
+    const color = "#cccccc";
 
     const Top = () => (
       <meshPhongMaterial color={new Color(color)} flatShading />

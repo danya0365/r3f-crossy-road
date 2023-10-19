@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { COLUMNS } from './constant';
-import { LaneHelper } from './helper';
+import { COLUMNS } from "../../../../../domain/constant/constant";
+import { LaneHelper } from "../../../../../domain/helper/helper";
 import {
   currentColumnState,
   currentLaneState,
@@ -9,12 +9,12 @@ import {
   lanesState,
   movesState,
   startMovingState,
-  stepStartTimestampState
-} from './shared-state';
-import { GameControls, MoveDirection } from './type';
-import { useKeyboardControls } from '@react-three/drei';
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+  stepStartTimestampState,
+} from "../../../../../domain/state/shared-state";
+import { GameControls, MoveDirection } from "../../../../../domain/type";
+import { useKeyboardControls } from "@react-three/drei";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 
 const GameController = () => {
   const [subscribeControls, getControls] = useKeyboardControls<GameControls>();
@@ -50,31 +50,31 @@ const GameController = () => {
     }
     const finalPositions = moves.reduce(
       (position, move) => {
-        if (move === 'forward')
+        if (move === "forward")
           return {
             laneNumber: position.laneNumber + 1,
-            columnNumber: position.columnNumber
+            columnNumber: position.columnNumber,
           };
-        if (move === 'backward')
+        if (move === "backward")
           return {
             laneNumber: position.laneNumber - 1,
-            columnNumber: position.columnNumber
+            columnNumber: position.columnNumber,
           };
-        if (move === 'left')
+        if (move === "left")
           return {
             laneNumber: position.laneNumber,
-            columnNumber: position.columnNumber - 1
+            columnNumber: position.columnNumber - 1,
           };
-        if (move === 'right')
+        if (move === "right")
           return {
             laneNumber: position.laneNumber,
-            columnNumber: position.columnNumber + 1
+            columnNumber: position.columnNumber + 1,
           };
       },
       { laneNumber: currentLane, columnNumber: currentColumn } as any
     );
 
-    if (direction === 'forward') {
+    if (direction === "forward") {
       const lane = lanes.find(
         (val) => val.laneNumber === finalPositions.laneNumber + 1
       );
@@ -82,7 +82,7 @@ const GameController = () => {
         return;
       }
       if (
-        lane.type === 'forest' &&
+        lane.type === "forest" &&
         lane.occupies.find(
           (val) => val.position === finalPositions.columnNumber
         )
@@ -91,7 +91,7 @@ const GameController = () => {
       }
       if (!stepStartTimestamp) setStartMoving(true);
       addNewLaneIfNeeded(lane.laneNumber);
-    } else if (direction === 'backward') {
+    } else if (direction === "backward") {
       const lane = lanes.find(
         (val) => val.laneNumber === finalPositions.laneNumber - 1
       );
@@ -102,7 +102,7 @@ const GameController = () => {
         return;
       }
       if (
-        lane.type === 'forest' &&
+        lane.type === "forest" &&
         lane.occupies.find(
           (val) => val.position === finalPositions.columnNumber
         )
@@ -110,7 +110,7 @@ const GameController = () => {
         return;
       }
       if (!stepStartTimestamp) setStartMoving(true);
-    } else if (direction === 'left') {
+    } else if (direction === "left") {
       if (finalPositions.columnNumber === 0) return;
       const lane = lanes.find(
         (val) => val.laneNumber === finalPositions.laneNumber
@@ -119,7 +119,7 @@ const GameController = () => {
         return;
       }
       if (
-        lane.type === 'forest' &&
+        lane.type === "forest" &&
         lane.occupies.find(
           (val) => val.position === finalPositions.columnNumber - 1
         )
@@ -127,7 +127,7 @@ const GameController = () => {
         return;
       }
       if (!stepStartTimestamp) setStartMoving(true);
-    } else if (direction === 'right') {
+    } else if (direction === "right") {
       if (finalPositions.columnNumber === COLUMNS - 1) return;
       const lane = lanes.find(
         (val) => val.laneNumber === finalPositions.laneNumber
@@ -136,7 +136,7 @@ const GameController = () => {
         return;
       }
       if (
-        lane.type === 'forest' &&
+        lane.type === "forest" &&
         lane.occupies.find(
           (val) => val.position === finalPositions.columnNumber + 1
         )
@@ -152,36 +152,36 @@ const GameController = () => {
     const forwardUnsubscribe = subscribeControls(
       (state) => state.forward,
       (pressed) => {
-        console.log('forward', pressed);
+        console.log("forward", pressed);
         if (pressed) {
-          moveChicken('forward');
+          moveChicken("forward");
         }
       }
     );
     const backUnsubscribe = subscribeControls(
       (state) => state.back,
       (pressed) => {
-        console.log('back', pressed);
+        console.log("back", pressed);
         if (pressed) {
-          moveChicken('backward');
+          moveChicken("backward");
         }
       }
     );
     const leftUnsubscribe = subscribeControls(
       (state) => state.left,
       (pressed) => {
-        console.log('left', pressed);
+        console.log("left", pressed);
         if (pressed) {
-          moveChicken('left');
+          moveChicken("left");
         }
       }
     );
     const rightUnsubscribe = subscribeControls(
       (state) => state.right,
       (pressed) => {
-        console.log('right', pressed);
+        console.log("right", pressed);
         if (pressed) {
-          moveChicken('right');
+          moveChicken("right");
         }
       }
     );

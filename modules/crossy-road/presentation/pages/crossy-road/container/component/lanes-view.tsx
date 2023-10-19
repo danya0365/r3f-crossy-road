@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
-import { GENERATE_LANES } from '../constant';
-import { LaneHelper } from '../helper';
-import { currentLaneState, lanesState } from '../shared-state';
-import { Lane } from '../type';
-import ForestView from './forest-view';
-import GrassView from './grass-view';
-import RoadView from './road-view';
-import React, { useLayoutEffect, useMemo } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { GENERATE_LANES } from "../../../../../domain/constant/constant";
+import { LaneHelper } from "../../../../../domain/helper/helper";
+import {
+  currentLaneState,
+  lanesState,
+} from "../../../../../domain/state/shared-state";
+import { Lane } from "../../../../../domain/type";
+import ForestView from "./forest-view";
+import GrassView from "./grass-view";
+import RoadView from "./road-view";
+import React, { useLayoutEffect, useMemo } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 const LanesView = () => {
   const currentLane = useRecoilValue(currentLaneState);
@@ -36,13 +39,13 @@ const LanesView = () => {
 
   return activeLanes.map((lane) => {
     switch (lane.type) {
-      case 'field': {
+      case "field": {
         return <GrassView key={`lanes-${lane.laneNumber}`} lane={lane} />;
       }
-      case 'forest': {
+      case "forest": {
         return <ForestView key={`lanes-${lane.laneNumber}`} lane={lane} />;
       }
-      case 'road': {
+      case "road": {
         return <RoadView key={`lanes-${lane.laneNumber}`} lane={lane} />;
       }
     }

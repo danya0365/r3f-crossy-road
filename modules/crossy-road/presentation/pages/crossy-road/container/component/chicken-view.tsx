@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   BOARD_WIDTH,
@@ -7,20 +7,20 @@ import {
   INITIAL_CAMERA_POSITION_Y,
   POSITION_WIDTH,
   STEP_TIME,
-  ZOOM
-} from '../constant';
+  ZOOM,
+} from "../../../../../domain/constant/constant";
 import {
   currentColumnState,
   currentLaneState,
   movesState,
   startMovingState,
-  stepStartTimestampState
-} from '../shared-state';
-import { useFrame, useThree } from '@react-three/fiber';
-import moment from 'moment';
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { useRecoilState } from 'recoil';
-import { Color, Group } from 'three';
+  stepStartTimestampState,
+} from "../../../../../domain/state/shared-state";
+import { useFrame, useThree } from "@react-three/fiber";
+import moment from "moment";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import { useRecoilState } from "recoil";
+import { Color, Group } from "three";
 
 const ChickenView = forwardRef<Group, any>((_, outerRef) => {
   const innerRef = useRef<Group>(null!);
@@ -48,7 +48,7 @@ const ChickenView = forwardRef<Group, any>((_, outerRef) => {
       const jumpDeltaDistance =
         Math.sin(Math.min(moveDeltaTime / STEP_TIME, 1) * Math.PI) * 8 * ZOOM;
       switch (moves[0]) {
-        case 'forward': {
+        case "forward": {
           const positionY =
             currentLane * POSITION_WIDTH * ZOOM + moveDeltaDistance;
           camera.position.y = INITIAL_CAMERA_POSITION_Y + positionY;
@@ -60,7 +60,7 @@ const ChickenView = forwardRef<Group, any>((_, outerRef) => {
 
           break;
         }
-        case 'backward': {
+        case "backward": {
           const positionY =
             currentLane * POSITION_WIDTH * ZOOM - moveDeltaDistance;
           camera.position.y = INITIAL_CAMERA_POSITION_Y + positionY;
@@ -71,7 +71,7 @@ const ChickenView = forwardRef<Group, any>((_, outerRef) => {
           }
           break;
         }
-        case 'left': {
+        case "left": {
           const positionX =
             (currentColumn * POSITION_WIDTH + POSITION_WIDTH / 2) * ZOOM -
             (BOARD_WIDTH * ZOOM) / 2 -
@@ -84,7 +84,7 @@ const ChickenView = forwardRef<Group, any>((_, outerRef) => {
           }
           break;
         }
-        case 'right': {
+        case "right": {
           const positionX =
             (currentColumn * POSITION_WIDTH + POSITION_WIDTH / 2) * ZOOM -
             (BOARD_WIDTH * ZOOM) / 2 +
@@ -102,19 +102,19 @@ const ChickenView = forwardRef<Group, any>((_, outerRef) => {
       // Once a step has ended
       if (moveDeltaTime > STEP_TIME) {
         switch (moves[0]) {
-          case 'forward': {
+          case "forward": {
             setCurrentLane((prev) => prev + 1);
             break;
           }
-          case 'backward': {
+          case "backward": {
             setCurrentLane((prev) => prev - 1);
             break;
           }
-          case 'left': {
+          case "left": {
             setCurrentColumn((prev) => prev - 1);
             break;
           }
-          case 'right': {
+          case "right": {
             setCurrentColumn((prev) => prev + 1);
             break;
           }
@@ -137,7 +137,7 @@ const ChickenView = forwardRef<Group, any>((_, outerRef) => {
         />
         <meshPhongMaterial
           attach="material"
-          color={new Color('#ffffff')}
+          color={new Color("#ffffff")}
           flatShading
         />
       </mesh>
@@ -145,7 +145,7 @@ const ChickenView = forwardRef<Group, any>((_, outerRef) => {
         <boxGeometry attach="geometry" args={[2 * ZOOM, 4 * ZOOM, 2 * ZOOM]} />
         <meshLambertMaterial
           attach="material"
-          color={new Color('#f0619a')}
+          color={new Color("#f0619a")}
           flatShading
         />
       </mesh>

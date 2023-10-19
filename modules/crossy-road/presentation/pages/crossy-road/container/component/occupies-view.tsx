@@ -1,13 +1,17 @@
-'use client';
+"use client";
 
-import { BOARD_WIDTH, POSITION_WIDTH, ZOOM } from '../constant';
-import { Lane } from '../type';
-import TreeView from './tree-view';
-import { CarView } from './vehicle-view';
+import {
+  BOARD_WIDTH,
+  POSITION_WIDTH,
+  ZOOM,
+} from "../../../../../domain/constant/constant";
+import { Lane } from "../../../../../domain/type";
+import TreeView from "./tree-view";
+import { CarView } from "./vehicle-view";
 
 const OccupiesView = ({ lane }: { lane: Lane }) => {
   return lane.occupies.map((object) => {
-    if (object.type === 'tree') {
+    if (object.type === "tree") {
       const x =
         (object.position * POSITION_WIDTH + POSITION_WIDTH / 2) * ZOOM -
         (BOARD_WIDTH * ZOOM) / 2;
@@ -20,7 +24,7 @@ const OccupiesView = ({ lane }: { lane: Lane }) => {
         />
       );
     }
-    if (object.type === 'car') {
+    if (object.type === "car") {
       const x =
         (object.position * POSITION_WIDTH * 2 + POSITION_WIDTH / 2) * ZOOM -
         (BOARD_WIDTH * ZOOM) / 2;

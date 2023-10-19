@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import BackDirectionalLight from '../component/back-directional-light';
-import ChickenView from '../component/chicken-view';
-import LanesView from '../component/lanes-view';
-import MainDirectionalLight from '../component/main-directional-light';
+import BackDirectionalLight from "../component/back-directional-light";
+import ChickenView from "../component/chicken-view";
+import LanesView from "../component/lanes-view";
+import MainDirectionalLight from "../component/main-directional-light";
 import {
   DISTANCE,
   INITIAL_CAMERA_POSITION_X,
   INITIAL_CAMERA_POSITION_Y,
   ROTATE_X,
-  ROTATE_Y
-} from '../constant';
-import GameController from '../game-controller';
-import { OrthographicCamera } from '@react-three/drei';
-import { useLayoutEffect, useRef } from 'react';
-import { Color, DirectionalLight, Group } from 'three';
+  ROTATE_Y,
+} from "../../../../../domain/constant/constant";
+import GameController from "../component/game-controller";
+import { OrthographicCamera } from "@react-three/drei";
+import { useLayoutEffect, useRef } from "react";
+import { Color, DirectionalLight, Group } from "three";
 
 const SceneView = () => {
   const chickenRef = useRef<Group>(null!);
@@ -32,14 +32,14 @@ const SceneView = () => {
         position={[
           INITIAL_CAMERA_POSITION_X,
           INITIAL_CAMERA_POSITION_Y,
-          DISTANCE
+          DISTANCE,
         ]}
       >
         <MainDirectionalLight ref={lightRef} />
       </OrthographicCamera>
       <BackDirectionalLight />
       <hemisphereLight
-        args={[new Color('#ffffff'), new Color('#ffffff'), 0.6]}
+        args={[new Color("#ffffff"), new Color("#ffffff"), 0.6]}
       />
       <LanesView />
       <GameController />

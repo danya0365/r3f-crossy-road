@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { ZOOM } from '../constant';
-import { Lane, OccupyObject } from '../type';
-import { GroupProps } from '@react-three/fiber';
-import { Color } from 'three';
+import { ZOOM } from "../../../../../domain/constant/constant";
+import { Lane, OccupyObject } from "../../../../../domain/type";
+import { GroupProps } from "@react-three/fiber";
+import { Color } from "three";
 
 const TreeView = ({
   lane,

@@ -4,8 +4,8 @@ import {
   LANE_TYPES,
   THREE_HEIGHTS,
   VEHICLE_COLORS,
-} from "./constant";
-import { Lane, OccupyObject } from "./type";
+} from "../constant/constant";
+import { Lane, OccupyObject } from "../type";
 
 export namespace LaneHelper {
   export const createLane = (index: number): Lane => {

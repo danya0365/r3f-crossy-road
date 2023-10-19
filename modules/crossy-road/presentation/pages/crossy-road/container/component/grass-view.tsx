@@ -1,9 +1,13 @@
-'use client';
+"use client";
 
-import { BOARD_WIDTH, POSITION_WIDTH, ZOOM } from '../constant';
-import { Lane } from '../type';
-import { PropsWithChildren } from 'react';
-import { Color } from 'three';
+import {
+  BOARD_WIDTH,
+  POSITION_WIDTH,
+  ZOOM,
+} from "../../../../../domain/constant/constant";
+import { Lane } from "../../../../../domain/type";
+import { PropsWithChildren } from "react";
+import { Color } from "three";
 
 const GrassView = ({ lane, children }: { lane: Lane } & PropsWithChildren) => {
   const laneNumber = lane.laneNumber;
@@ -48,9 +52,9 @@ const GrassView = ({ lane, children }: { lane: Lane } & PropsWithChildren) => {
 
   return (
     <group position={[0, y, z]}>
-      <MiddleGrass color={'#baf455'} />
-      <LeftGrass color={'#99c846'} />
-      <RightGrass color={'#99c846'} />
+      <MiddleGrass color={"#baf455"} />
+      <LeftGrass color={"#99c846"} />
+      <RightGrass color={"#99c846"} />
       {children}
     </group>
   );

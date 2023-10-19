@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { DISTANCE } from '../constant';
-import { DirectionalLightProps } from '@react-three/fiber';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
-import { Color, DirectionalLight } from 'three';
+import { DISTANCE } from "../../../../../domain/constant/constant";
+import { DirectionalLightProps } from "@react-three/fiber";
+import { forwardRef, useImperativeHandle, useRef } from "react";
+import { Color, DirectionalLight } from "three";
 
 const MainDirectionalLight = forwardRef<
   DirectionalLight,
@@ -16,7 +16,7 @@ const MainDirectionalLight = forwardRef<
     <directionalLight
       ref={innerRef}
       intensity={0.6}
-      color={new Color('#ffffff')}
+      color={new Color("#ffffff")}
       castShadow
       position={[-150, 100, -700]}
       shadow-mapSize={[2048, 2048]}
