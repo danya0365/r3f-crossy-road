@@ -6,26 +6,14 @@ import {
   ZOOM,
 } from "../../../../../domain/constant/constant";
 import { Lane, OccupyObject } from "../../../../../domain/type";
-import Texture from "./texture";
 import { GroupProps, MeshProps, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
-import { Color, Group } from "three";
+import { useLayoutEffect, useRef } from "react";
+import { CanvasTexture, Color, Group, MeshBasicMaterial } from "three";
 
 const aBitBeforeTheBeginningOfLane =
   (-BOARD_WIDTH * ZOOM) / 2 - POSITION_WIDTH * 2 * ZOOM;
 const aBitAfterTheEndOFLane =
   (BOARD_WIDTH * ZOOM) / 2 + POSITION_WIDTH * 2 * ZOOM;
-
-export const carFrontTexture = Texture(40, 80, [{ x: 0, y: 10, w: 30, h: 60 }]);
-export const carBackTexture = Texture(40, 80, [{ x: 10, y: 10, w: 30, h: 60 }]);
-export const carRightSideTexture = Texture(110, 40, [
-  { x: 10, y: 0, w: 50, h: 30 },
-  { x: 70, y: 0, w: 30, h: 30 },
-]);
-export const carLeftSideTexture = Texture(110, 40, [
-  { x: 10, y: 10, w: 50, h: 30 },
-  { x: 70, y: 10, w: 30, h: 30 },
-]);
 
 const Wheel = (props: MeshProps) => {
   const color = "#FF5733"; //'#333333';
@@ -64,38 +52,99 @@ export const CarView = ({
     const x = 6 * ZOOM;
     const color = "#cccccc";
 
+    const drawCanvasTexture = ({
+      width,
+      height,
+      rects,
+    }: {
+      width: number;
+      height: number;
+      rects: { x: number; y: number; w: number; h: number }[];
+    }) => {
+      const canvas = document.createElement("canvas")!;
+      const texture = new CanvasTexture(canvas);
+
+      canvas.width = width;
+      canvas.height = height;
+      let ctx = canvas.getContext("2d")!;
+      ctx.fillStyle = "red";
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = "yellow";
+      rects.forEach((rect) => {
+        ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
+      });
+      texture.needsUpdate = true;
+
+      return texture;
+    };
+
+    const Back = () => {
+      const texture = drawCanvasTexture({
+        width: 40,
+        height: 80,
+        rects: [{ x: 10, y: 10, w: 30, h: 60 }],
+      });
+      return (
+        <meshPhongMaterial color={new Color(color)} flatShading map={texture} />
+      );
+    };
+
+    const Front = () => {
+      const texture = drawCanvasTexture({
+        width: 40,
+        height: 80,
+        rects: [{ x: 0, y: 10, w: 30, h: 60 }],
+      });
+      return (
+        <meshPhongMaterial color={new Color(color)} flatShading map={texture} />
+      );
+    };
+
+    const Left = () => {
+      const texture = drawCanvasTexture({
+        width: 110,
+        height: 40,
+        rects: [
+          { x: 10, y: 10, w: 50, h: 30 },
+          { x: 70, y: 10, w: 30, h: 30 },
+        ],
+      });
+      return (
+        <meshPhongMaterial color={new Color(color)} flatShading map={texture} />
+      );
+    };
+
+    const Right = () => {
+      const texture = drawCanvasTexture({
+        width: 110,
+        height: 40,
+        rects: [
+          { x: 10, y: 0, w: 50, h: 30 },
+          { x: 70, y: 0, w: 30, h: 30 },
+        ],
+      });
+      return (
+        <meshPhongMaterial color={new Color(color)} flatShading map={texture} />
+      );
+    };
+
     const Top = () => (
       <meshPhongMaterial color={new Color(color)} flatShading />
     );
+
     const Bottom = () => (
       <meshPhongMaterial color={new Color(color)} flatShading />
     );
+
     return (
       <mesh position={[x, 0, z]} castShadow receiveShadow>
-        <boxGeometry attach="geometry" args={[33 * ZOOM, 24 * ZOOM, 12 * ZOOM]}>
-          <meshPhongMaterial
-            color={new Color(color)}
-            flatShading
-            map={carBackTexture}
-          />
-          <meshPhongMaterial
-            color={new Color(color)}
-            flatShading
-            map={carFrontTexture}
-          />
-          <meshPhongMaterial
-            color={new Color(color)}
-            flatShading
-            map={carLeftSideTexture}
-          />
-          <meshPhongMaterial
-            color={new Color(color)}
-            flatShading
-            map={carRightSideTexture}
-          />
-          <Top />
-          <Bottom />
-        </boxGeometry>
+        <boxGeometry args={[33 * ZOOM, 24 * ZOOM, 12 * ZOOM]} />
+        <Back />
+        <Front />
+        <Left />
+        <Right />
+        <Top />
+        <Bottom />
       </mesh>
     );
   };

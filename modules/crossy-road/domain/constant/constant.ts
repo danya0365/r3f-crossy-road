@@ -2,7 +2,7 @@
 
 import { LaneType } from "../type";
 
-export const ZOOM = 1.0;
+export const ZOOM = 2.0;
 
 export const CHICKEN_SIZE = 15;
 
