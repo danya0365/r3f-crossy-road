@@ -3,12 +3,14 @@
 import {
   BOARD_WIDTH,
   CHICKEN_SIZE,
-  INITIAL_CAMERA_POSITION_X,
-  INITIAL_CAMERA_POSITION_Y,
   POSITION_WIDTH,
   STEP_TIME,
   ZOOM,
 } from "../../../../../domain/constant/constant";
+import {
+  INITIAL_CAMERA_POSITION_X,
+  INITIAL_CAMERA_POSITION_Y,
+} from "../../../../../domain/constant/Orthographic-camera";
 import {
   currentColumnState,
   currentLaneState,

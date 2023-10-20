@@ -8,12 +8,14 @@ import {
   DISTANCE,
   INITIAL_CAMERA_POSITION_X,
   INITIAL_CAMERA_POSITION_Y,
+  INITIAL_CAMERA_POSITION_Z,
   ROTATE_X,
   ROTATE_Y,
-} from "../../../../../domain/constant/constant";
+  ROTATE_Z,
+} from "../../../../../domain/constant/Orthographic-camera";
 import GameController from "../component/game-controller";
-import { OrthographicCamera } from "@react-three/drei";
-import { useLayoutEffect, useRef } from "react";
+import { OrthographicCamera, PerspectiveCamera } from "@react-three/drei";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Color, DirectionalLight, Group } from "three";
 
 const SceneDefaultView = () => {
@@ -27,16 +29,17 @@ const SceneDefaultView = () => {
     <>
       <ChickenView ref={chickenRef} />
       <OrthographicCamera
-        makeDefault
-        rotation={[ROTATE_X, ROTATE_Y, (10 * Math.PI) / 180]}
+        rotation={[ROTATE_X, ROTATE_Y, ROTATE_Z]}
         position={[
           INITIAL_CAMERA_POSITION_X,
           INITIAL_CAMERA_POSITION_Y,
-          DISTANCE,
+          INITIAL_CAMERA_POSITION_Z,
         ]}
+        makeDefault
       >
         <MainDirectionalLight ref={lightRef} />
       </OrthographicCamera>
+
       <BackDirectionalLight />
       <hemisphereLight
         args={[new Color("#ffffff"), new Color("#ffffff"), 0.6]}

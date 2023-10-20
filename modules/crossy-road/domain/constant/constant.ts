@@ -23,11 +23,3 @@ export const THREE_HEIGHTS = [20, 45, 60];
 export const LANE_SPEEDS = [2, 2.5, 3];
 
 export const VEHICLE_COLORS = ["#a52523", "#bdb638", "#78b14b"];
-
-export const DISTANCE = 500;
-export const ROTATE_X = (50 * Math.PI) / 180;
-export const ROTATE_Y = (20 * Math.PI) / 180;
-export const INITIAL_CAMERA_POSITION_Y = -Math.tan(ROTATE_X) * DISTANCE;
-export const INITIAL_CAMERA_POSITION_X =
-  Math.tan(ROTATE_Y) *
-  Math.sqrt(DISTANCE ** 2 + INITIAL_CAMERA_POSITION_Y ** 2);
